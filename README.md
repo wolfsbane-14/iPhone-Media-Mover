@@ -212,12 +212,12 @@ All transfer operations are logged in `~/iphone_logs/` with timestamp:
 
 ### Photos
 - **JPEG** (.jpg, .jpeg)
-- **HEIC** (.heic) - iPhone's efficient format
+- **HEIC** (.heic) 
 - **PNG** (.png)
-- **AAE** (.aae) - iPhone editing information
+- **AAE** (.aae) 
 
 ### Videos
-- **MOV** (.mov) - iPhone's default video format
+- **MOV** (.mov) 
 - **MP4** (.mp4)
 - **M4V** (.m4v)
 
