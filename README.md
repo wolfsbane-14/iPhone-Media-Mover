@@ -12,7 +12,7 @@ A robust application to **safely copy, verify, and optionally delete photos and 
 * Detailed logs: `success.txt`, `failed.txt`, `deleted.txt`
 * Compatible with recent versions of Ubuntu using `ifuse`
 
-![Application interface](img/img1.jpg)
+![Application interface](img/img1.png)
 
 ## System Setup (One-Time)
 
@@ -52,7 +52,7 @@ python3 iphone_move.py --dest ~/Pictures/iPhone --organise --delete --checksum
 python3 iphone_move.py --dest ~/backup_iPhone
 ```
 
-![Ongoing transfer of files](img/img2.jpg)
+![Ongoing transfer of files](img/img2.png)
 
 ## Output Logs
 
@@ -62,7 +62,7 @@ Logs are saved in a `./iphone_logs/` directory:
 * `failed.txt` – Files that failed to copy or delete
 * `deleted.txt` – Files deleted from the iPhone (only if `--delete` is used)
 
-![Successful transfer of files with logs](img/img3.jpg)
+![Successful transfer of files with logs](img/img3.png)
 
 ## Resuming Transfers
 
