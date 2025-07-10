@@ -38,94 +38,197 @@ iPhone Media Mover is a robust, feature-rich GUI application designed specifical
 
 ![Application interface](img/img1.png)
 
-## System Setup (One-Time)
+## 🚀 Installation
 
-Install necessary packages and Python libraries:
+### Quick Setup
+1. **Install system dependencies**:
+   ```bash
+   sudo apt update
+   sudo apt install -y ifuse libimobiledevice6 libimobiledevice-utils gvfs-backends python3-tk
+   ```
 
+2. **Install Python dependencies**:
+   ```bash
+   pip3 install Pillow piexif
+   ```
+
+3. **Download and run**:
+   ```bash
+   # Download the application
+   wget https://github.com/your-repo/iphone-media-mover/raw/main/iphone_move.py
+   
+   # Make it executable
+   chmod +x iphone_move.py
+   
+   # Run the application
+   python3 iphone_move.py
+   ```
+
+### Alternative Installation
+You can also save the script manually and run it:
 ```bash
-sudo apt update
-sudo apt install -y ifuse libimobiledevice6 libimobiledevice-utils gvfs-backends
-pip3 install tqdm pillow piexif
+# Save as iphone_move.py
+python3 iphone_move.py
 ```
 
-## Save the Script
+## 💻 Usage Guide
 
-Save the script as `iphone_move.py`. Make it executable:
+### Getting Started
+1. **Connect your iPhone** via USB cable
+2. **Unlock your iPhone** and tap "Trust" when prompted
+3. **Launch the application**:
+   ```bash
+   python3 iphone_move.py
+   ```
 
-```bash
-chmod +x iphone_move.py
-```
-
-## Usage
-
-### 1. Copy and Organize into Folders by Year/Month
-
-```bash
-python3 iphone_move.py --dest ~/Pictures/iPhone --organise
-```
-
-### 2. Copy, Verify with Checksums, and Delete Originals from iPhone
-
-```bash
-python3 iphone_move.py --dest ~/Pictures/iPhone --organise --delete --checksum
-```
-
-### 3. Fast Flat Copy (No Organizing, No Deletion)
-
-```bash
-python3 iphone_move.py --dest ~/backup_iPhone
-```
 
 ![Transfer in Progress](img/img2.png)
 
-## Output Logs
+### Main Controls
+- **Browse Button**: Select destination folder for your media files
+- **Organise into YYYY/MM**: Create date-based folder structure
+- **Delete from iPhone**: Remove originals after successful transfer (marked as unstable)
+- **Verify with checksum**: Enable MD5 verification (slower but more secure)
+- **Open logs folder**: Automatically open log directory after transfer
+- **Start Transfer**: Begin the transfer process
 
-Logs are saved in a `./iphone_logs/` directory:
+#### Progress Tracking
+- **Visual Progress Bar**: Shows transfer completion percentage
+- **File Counter**: Current file / Total files
+- **Time Estimates**: Elapsed time and estimated remaining time
+- **Live Log**: Real-time display of transfer operations
 
-* `success.txt` – Successfully copied and verified files
-* `failed.txt` – Files that failed to copy or delete
-* `deleted.txt` – Files deleted from the iPhone (only if `--delete` is used)
+### Transfer Options
+
+#### Basic Copy
+- Select destination folder
+- Click "Start Transfer"
+- Files copied to destination maintaining original structure
+
+#### Organized Copy
+- ✅ Check "Organise into YYYY/MM"
+- Files automatically sorted by date into year/month folders
+- Uses EXIF data when available, falls back to file modification time
+
+#### Verified Copy
+- ✅ Check "Verify with checksum (slower)"
+- Each file verified with MD5 hash after copy
+- Recommended for critical transfers
+
+#### Complete Migration
+- ✅ Check "Organise into YYYY/MM"
+- ✅ Check "Verify with checksum (slower)"
+- ✅ Check "Delete from iPhone after copy"
+- ⚠️ **Warning**: Only use delete option after testing
+
 
 ![Successful transfer of files with logs](img/img3.png)
 
-## Resuming Transfers
+## 📊 File Organization
 
-If disconnected or interrupted, simply rerun the same command. The script will **skip already verified files** and continue from where it left off.
-
-## Checksum Option (`--checksum`)
-
-* Compares MD5 hashes to ensure file integrity.
-* Recommended when using `--delete` for extra safety.
-* Slower but provides verification beyond file size.
-
-## Options Reference
-
-| Option | Description |
-|--------|-------------|
-| `--dest` | Destination directory on Ubuntu (required) |
-| `--organise` | Organize files into `YYYY/MM` folders |
-| `--delete` | Delete originals from iPhone after successful copy |
-| `--checksum` | Use MD5 checksums to verify file integrity |
-| `--mount` | Mount point (default: `~/iPhone`) |
-
-## Example Directory Structure (with `--organise`)
-
+### With Organization Enabled
 ```
 ~/Pictures/iPhone/
 ├── 2023/
-│   ├── 11/
-│   └── 12/
+│   ├── 11/          # November 2023 photos
+│   │   ├── IMG_2847.JPG
+│   │   ├── IMG_2848.AAE
+│   │   └── VID_2849.MOV
+│   └── 12/          # December 2023 photos
+│       ├── IMG_2850.HEIC
+│       └── IMG_2851.PNG
 ├── 2024/
-│   ├── 01/
-│   └── 06/
+│   ├── 01/          # January 2024 photos
+│   ├── 06/          # June 2024 photos
+│   └── 12/          # December 2024 photos
+└── iphone_logs/     # Transfer logs
+    ├── success_20241210_143052.txt
+    ├── failed_20241210_143052.txt
+    └── deleted_20241210_143052.txt
 ```
 
-## Notes
+### Without Organization
+```
+~/Pictures/iPhone/
+├── IMG_2847.JPG
+├── IMG_2848.AAE
+├── VID_2849.MOV
+├── IMG_2850.HEIC
+└── IMG_2851.PNG
+```
 
-* Make sure your iPhone is **unlocked and trusted** when connecting.
-* Only files under the `DCIM` directory will be processed.
-* The script automatically unmounts the iPhone at the end.
+## 📝 Logging System
 
-## License
+### Log Files
+All transfer operations are logged in `~/iphone_logs/` with timestamp:
 
-MIT License – Free to use, modify, and distribute.
+- **`success_YYYYMMDD_HHMMSS.txt`**: Successfully transferred files
+- **`failed_YYYYMMDD_HHMMSS.txt`**: Files that failed to transfer
+- **`deleted_YYYYMMDD_HHMMSS.txt`**: Files deleted from iPhone (if applicable)
+
+### Log Format
+```
+/home/user/iPhone/DCIM/100APPLE/IMG_2847.JPG
+/home/user/iPhone/DCIM/100APPLE/IMG_2848.AAE
+/home/user/iPhone/DCIM/101APPLE/VID_2849.MOV
+```
+
+## 🔧 Advanced Features
+
+### Automatic File Detection
+- **Recursive DCIM Scanning**: Finds all media files in iPhone's DCIM directory
+- **Multiple Format Support**: JPEG, HEIC, PNG, AAE, MOV, MP4, and more
+- **Smart Filtering**: Processes only actual media files
+
+### Duplicate Handling
+- **Intelligent Naming**: Automatically renames duplicates (e.g., `IMG_2847_1.JPG`)
+- **Content Verification**: Checks file size and optionally MD5 hash
+- **Skip Existing**: Automatically skips files that already exist and match
+
+### Transfer Resumption
+- **Automatic Resume**: Rerun the same command to continue interrupted transfers
+- **Skip Verified Files**: Only processes new or failed files
+- **Progress Preservation**: Maintains transfer state across sessions
+
+## 🛡️ Safety Features
+
+### Data Protection
+- **Non-destructive Default**: Original files remain on iPhone unless explicitly deleted
+- **Verification Required**: Files must be successfully copied and verified before deletion
+- **Transfer Confirmation**: Dialog confirmation before allowing exit during transfers
+- **Error Recovery**: Graceful handling of disconnections and errors
+
+### Success Notifications
+- **Complete Success**: All files transferred successfully
+- **Partial Success**: Some files failed (details in logs)
+- **Transfer Interrupted**: Operation cancelled or failed
+
+### Post-Transfer Actions
+- **Automatic Log Opening**: Optional automatic opening of log directory
+- **Transfer Statistics**: Clear summary of successful and failed transfers
+- **Error Details**: Specific error information for troubleshooting
+
+## 📊 Supported File Types
+
+### Photos
+- **JPEG** (.jpg, .jpeg)
+- **HEIC** (.heic) - iPhone's efficient format
+- **PNG** (.png)
+- **AAE** (.aae) - iPhone editing information
+
+### Videos
+- **MOV** (.mov) - iPhone's default video format
+- **MP4** (.mp4)
+- **M4V** (.m4v)
+
+### Metadata
+- **EXIF Date Extraction**: Uses photo metadata for accurate dating
+- **Fallback Dating**: Uses file modification time when EXIF unavailable
+
+## 🔒 Security & Privacy
+
+### Local Processing
+- **No Cloud Dependencies**: All processing done locally
+- **No Data Transmission**: No data sent to external servers
+- **Complete Control**: Full control over your media files
+
