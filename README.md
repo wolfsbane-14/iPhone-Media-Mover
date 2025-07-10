@@ -1,6 +1,6 @@
-# iPhone Media Transfer Script for Ubuntu
+# iPhone Media Mover
 
-A robust script to **safely copy, verify, and optionally delete photos and videos from an iPhone to Ubuntu**. Designed for reliability with clear logging, resumption support, and optional checksum validation.
+A robust application to **safely copy, verify, and optionally delete photos and videos from an iPhone to Ubuntu**. Designed for reliability with clear logging, resumption support, and optional checksum validation.
 
 ## Features
 
