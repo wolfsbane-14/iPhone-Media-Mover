@@ -1,16 +1,40 @@
 # iPhone Media Mover
 
-A robust application to **safely copy, verify, and optionally delete photos and videos from an iPhone to Ubuntu**. Designed for reliability with clear logging, resumption support, and optional checksum validation.
 
-## Features
+iPhone Media Mover is a robust, feature-rich GUI application designed specifically for Linux users to safely transfer, organize, and manage photos and videos from iOS devices. Built with Python and Tkinter, it provides a user-friendly interface while maintaining enterprise-grade reliability and safety features.
 
-* Copy → Verify → (Optional) Delete
-* Automatically resumes after disconnection
-* Organizes files by `YYYY/MM` (optional)
-* Optional checksum (MD5) verification
-* Progress bar using `tqdm`
-* Detailed logs: `success.txt`, `failed.txt`, `deleted.txt`
-* Compatible with recent versions of Ubuntu using `ifuse`
+##  Key Features
+
+### 🖥️ Modern GUI Interface
+- **Dark Mode Theme**: Eye-friendly dark interface by default
+- **Real-time Progress Tracking**: Visual progress bar with time estimates
+- **Live Transfer Logs**: Real-time display of transfer operations
+- **Intuitive Controls**: Simple checkboxes and buttons for all options
+
+### 🔒 Safety & Reliability
+- **Copy-Verify-Delete Workflow**: Ensures data integrity before any deletions
+- **Checksum Verification**: Optional MD5 hash verification for complete file integrity
+- **Duplicate Handling**: Smart filename collision resolution
+- **Resumable Transfers**: Automatically skips already transferred files
+- **Comprehensive Logging**: Detailed logs for successful, failed, and deleted files
+
+### 📁 Smart Organization
+- **Date-based Folders**: Automatically organize by YYYY/MM structure using EXIF data
+- **Flexible Destination**: Choose any destination folder on your system
+- **DCIM Scanning**: Recursive scanning of all iPhone DCIM subdirectories
+- **Multiple File Types**: Supports all common photo and video formats
+
+### 🛡️ Data Protection
+- **Non-destructive by Default**: Original files remain untouched unless explicitly deleted
+- **Verification Before Deletion**: Only removes originals after successful copy and verification
+- **Error Handling**: Graceful handling of transfer failures and interruptions
+- **Transfer Cancellation**: Safe exit with confirmation during active transfers
+
+## 📋 System Requirements
+
+### Operating System
+- **Ubuntu 18.04+** (or compatible Debian-based distributions)
+- **Python 3.6+** with Tkinter support
 
 ![Application interface](img/img1.png)
 
@@ -52,7 +76,7 @@ python3 iphone_move.py --dest ~/Pictures/iPhone --organise --delete --checksum
 python3 iphone_move.py --dest ~/backup_iPhone
 ```
 
-![Ongoing transfer of files](img/img2.png)
+![Transfer in Progress](img/img2.png)
 
 ## Output Logs
 
